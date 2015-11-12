@@ -15,7 +15,7 @@ public class Server {
      * @param  args      [description]
      * @throws Exception [description]
      */
-	public static void main(String[] args) throws Exception {
+	public static void run() throws Exception {
 		int port = 8000;
 		final SessionManager sessionMgr = new SessionManager();
 		HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);

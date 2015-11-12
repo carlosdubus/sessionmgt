@@ -8,6 +8,6 @@ public class Main {
         new User("Rahul", "1234");
         User u = User.find("Hue");
         System.out.println(u.getName());
-
+        Server.run();   
     }
 }
