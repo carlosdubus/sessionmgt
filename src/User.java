@@ -26,6 +26,10 @@ public class User {
 		return password;
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	static User find(String name){
 		for (User user : users.values()) {
 			if(user.getName().equals(name)){
@@ -33,5 +37,9 @@ public class User {
 			}
 		}
 		return null;
+	}
+
+	public String toString(){
+		return name;
 	}
 }
