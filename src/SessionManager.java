@@ -15,11 +15,9 @@ public class SessionManager {
 		if (!users.containsKey(email)) {
 			return null;
 		}
-
 		if (users.get(email).getPassword().equals(password)) {
 			return createToken();
 		}
-
 		return null;
 	}
 

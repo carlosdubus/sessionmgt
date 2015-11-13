@@ -10,6 +10,11 @@ import java.util.*;
 import org.json.simple.JSONObject;
 
 public class Server {
+    /**
+     * [main description]
+     * @param  args      [description]
+     * @throws Exception [description]
+     */
 	public static void main(String[] args) throws Exception {
 		int port = 8000;
 		final SessionManager sessionMgr = new SessionManager();
@@ -35,7 +40,13 @@ public class Server {
 		server.start();
 		System.out.println("Server started at " + port);
 	}
-
+    /**
+     * Send JSON response
+     * @param  t            [description]
+     * @param  responseCode [description]
+     * @param  responseObj  [description]
+     * @throws IOException  [description]
+     */
 	static void sendJSONResponse(HttpExchange t, int responseCode, JSONObject responseObj) throws IOException {
 		String response = responseObj.toString();
 		OutputStream os = t.getResponseBody();
