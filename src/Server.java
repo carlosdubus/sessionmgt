@@ -25,9 +25,9 @@ public class Server {
 			@Override
 			public void handle(HttpExchange t) throws IOException {
 				Map <String, String> params = queryToMap(t.getRequestURI().getQuery());
-				String email = params.get("email");
+				String name = params.get("name");
 				String password = params.get("password");
-				String token = sessionMgr.authenticate(email, password);
+				String token = sessionMgr.authenticate(name, password);
 
 				JSONObject responseObj = new JSONObject();
 				responseObj.put("token", token);
