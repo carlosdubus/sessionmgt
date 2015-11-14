@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.security.SecureRandom;
+
 
 public class SessionManager {
 	final Map<String, User> users = new HashMap<String, User>() {
@@ -22,6 +24,11 @@ public class SessionManager {
 	}
 
 	String createToken() {
-		return "234234ghj2g4jh42g4g234";
+		
+	    SecureRandom random = new SecureRandom();
+	    byte bytes[] = new byte[20];
+	    random.nextBytes(bytes);
+	    String token = bytes.toString();
+	    return token;		
 	}
 }
