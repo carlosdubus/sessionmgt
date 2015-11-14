@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import org.json.simple.JSONObject;
 
 public class User {
 	private static int id_counter = 1;
@@ -39,7 +40,13 @@ public class User {
 		return null;
 	}
 
+	static JSONObject list(){
+		JSONObject list = new JSONObject();
+		list.put("users", users.values());
+		return list;
+	}
+
 	public String toString(){
-		return name;
+		return "id: " + id + " name: " + name;
 	}
 }

@@ -7,6 +7,7 @@ public class Main {
         new User("Carlos", "1234");
         new User("Rahul", "1234");
 
+        System.out.println(User.list());
         Server.run();
     }
 }
