@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.security.SecureRandom;
 
 public class SessionManager {
     public String authenticate(String name, String password) {
@@ -14,8 +15,10 @@ public class SessionManager {
     }
 
     String createToken(User user) {
-        Random rand = new Random();
-        String token = Integer.toString(rand.nextInt(50) + 1);
+        SecureRandom random = new SecureRandom();
+        byte bytes[] = new byte[20];
+        random.nextBytes(bytes);
+        String token = bytes.toString();
         new Session(user, token);
         return token;
     }
