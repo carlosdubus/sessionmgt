@@ -33,6 +33,10 @@ class Session {
         return Session.sessions.get(token);
     }
 
+    public User getUser(){
+        return user;
+    }
+
     public String toString(){
         return "user: " + user + " token: " + token + " expire: " + expireDate;
     }

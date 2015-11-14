@@ -23,4 +23,8 @@ public class SessionManager {
     Session checkToken(String token){
         return Session.find(token);
     }
+
+    Boolean checkRole(User user, String role){
+        return user.getRole().equals(role);
+    }
 }

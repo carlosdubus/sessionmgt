@@ -8,11 +8,13 @@ public class User {
 
 	int id;
 	String name;
+	String role;
 	String password;
 
-	public User(String name, String password) {
+	public User(String name, String password, String role) {
 		this.id = User.id_counter;
 		this.name = name;
+		this.role = role;
 		this.password = password;
 
 		User.users.put(id, this);
@@ -31,6 +33,10 @@ public class User {
 		return id;
 	}
 
+	public String getRole() {
+		return role;
+	}
+
 	static User find(String name){
 		for (User user : users.values()) {
 			if(user.getName().equals(name)){
@@ -40,7 +46,7 @@ public class User {
 		return null;
 	}
 
-	static JSONObject list(){
+	static JSONObject getList(){
 		JSONObject list = new JSONObject();
 		list.put("users", users.values());
 		return list;
