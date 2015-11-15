@@ -33,6 +33,14 @@ class Session {
         return Session.sessions.get(token);
     }
 
+    boolean isExpired(){
+        return (getExpireDate().compareTo(new Date()) < 0);
+    }
+
+    boolean hasRole(String role){
+        return (getUser().getRole().equals(role));
+    }
+
     public User getUser(){
         return user;
     }

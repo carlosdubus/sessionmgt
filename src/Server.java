@@ -36,28 +36,34 @@ public class Server {
 				sendJSONResponse(t, responseCode, responseObj);
 			}
 		});
-	    // /usersa
+	    // /users
 	    server.createContext("/users", new HttpHandler() {
-	      @Override
-	      public void handle(HttpExchange t) throws IOException {
-	        Map <String, String> params = queryToMap(t.getRequestURI().getQuery());
-	        String token = params.get("token");
-	        Boolean is_authorized = false;
+			@Override
+			public void handle(HttpExchange t) throws IOException {
+				Map <String, String> params = queryToMap(t.getRequestURI().getQuery());
+				String token = params.get("token");
+				Boolean is_authorized = false;
+				Session session = sessionMgr.checkToken(token);
+				int responseCode = 401;
 
-	        Session session = sessionMgr.checkToken(token);
+				JSONObject response = new JSONObject();
 
-	        if(session!=null){
-	            is_authorized = session.getUser().getRole().equals("admin");
-	        }
+				if(session!=null){
+					if(session.isExpired()){
+						response.put("token", "expired");
+						responseCode = 419;
+					}else{
+						if(session.hasRole("admin")){
+							response = User.getList();
+							responseCode = 200;
+						}else{
+							responseCode = 403;
+						}
+					}
+				}
 
-	        JSONObject response = new JSONObject();
-	        if(is_authorized){
-	            response = User.getList();
-	        }
-	        int responseCode = !is_authorized ? 403 : 200;
-
-	        sendJSONResponse(t, responseCode, response);
-	      }
+				sendJSONResponse(t, responseCode, response);
+			}
 	    });
 	    server.createContext("/", new StaticHttpHandler());
 		server.setExecutor(null); // creates a default executor
