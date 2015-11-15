@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
 public class User {
 	private static int id_counter = 1;
@@ -48,11 +49,15 @@ public class User {
 
 	static JSONObject getList(){
 		JSONObject list = new JSONObject();
-		list.put("users", users.values());
+		JSONArray names = new JSONArray();
+		for (User user : users.values()) {
+			names.add(user.getName());
+		}
+		list.put("users", names);
 		return list;
 	}
 
 	public String toString(){
-		return "id: " + id + " name: " + name;
+		return name;
 	}
 }
