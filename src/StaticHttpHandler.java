@@ -21,7 +21,7 @@ public class StaticHttpHandler implements HttpHandler {
             path = "/index.html";
         }
 
-        System.out.println("looking for: " + root + path);
+        // System.out.println("looking for: " + root + path);
         File file = new File(root + path).getCanonicalFile();
 
         if (!file.isFile()) {
