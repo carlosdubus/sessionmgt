@@ -28,7 +28,7 @@
             var self = this;
             $.ajax('/auth', {
                 data: {
-                    email: self.user(),
+                    name: self.user(),
                     password: self.password()
                 },
                 statusCode: {
@@ -64,9 +64,6 @@
         this.error = ko.observable();
         var self = this;
         $.ajax('/users', {
-            data: {
-                token: app.session.token
-            },
             statusCode: {
                 403: function() {
                     self.error("Error: User not authorized to see user list.");
