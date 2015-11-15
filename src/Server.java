@@ -36,6 +36,7 @@ public class Server {
 				sendJSONResponse(t, responseCode, responseObj);
 			}
 		});
+		server.createContext("/", new StaticHttpHandler());
 		server.setExecutor(null); // creates a default executor
 		server.start();
 		System.out.println("Server started at " + port);
