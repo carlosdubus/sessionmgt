@@ -54,7 +54,7 @@ public class Server {
 	        if(is_authorized){
 	            response = User.getList();
 	        }
-	        int responseCode = is_authorized? 403 : 200;
+	        int responseCode = !is_authorized ? 403 : 200;
 
 	        sendJSONResponse(t, responseCode, response);
 	      }
