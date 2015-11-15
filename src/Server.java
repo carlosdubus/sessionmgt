@@ -15,7 +15,7 @@ public class Server {
      * @param  args      [description]
      * @throws Exception [description]
      */
-	public static void main(String[] args) throws Exception {
+	public static void run() throws Exception {
 		int port = 8000;
 		final SessionManager sessionMgr = new SessionManager();
 		HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
@@ -25,9 +25,9 @@ public class Server {
 			@Override
 			public void handle(HttpExchange t) throws IOException {
 				Map <String, String> params = queryToMap(t.getRequestURI().getQuery());
-				String email = params.get("email");
+				String name = params.get("name");
 				String password = params.get("password");
-				String token = sessionMgr.authenticate(email, password);
+				String token = sessionMgr.authenticate(name, password);
 
 				JSONObject responseObj = new JSONObject();
 				responseObj.put("token", token);
@@ -36,7 +36,30 @@ public class Server {
 				sendJSONResponse(t, responseCode, responseObj);
 			}
 		});
-		server.createContext("/", new StaticHttpHandler());
+	    // /usersa
+	    server.createContext("/users", new HttpHandler() {
+	      @Override
+	      public void handle(HttpExchange t) throws IOException {
+	        Map <String, String> params = queryToMap(t.getRequestURI().getQuery());
+	        String token = params.get("token");
+	        Boolean is_authorized = false;
+
+	        Session session = sessionMgr.checkToken(token);
+
+	        if(session!=null){
+	            is_authorized = session.getUser().getRole().equals("admin");
+	        }
+
+	        JSONObject response = new JSONObject();
+	        if(is_authorized){
+	            response = User.getList();
+	        }
+	        int responseCode = is_authorized? 403 : 200;
+
+	        sendJSONResponse(t, responseCode, response);
+	      }
+	    });
+	    server.createContext("/", new StaticHttpHandler());
 		server.setExecutor(null); // creates a default executor
 		server.start();
 		System.out.println("Server started at " + port);
