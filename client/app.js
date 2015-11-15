@@ -104,15 +104,6 @@
          */
         this.session = ko.observable(new Session());
         /**
-         * [requireAuth description]
-         * @return {[type]} [description]
-         */
-        this.requireAuth = function() {
-            if (!this.session().authenticated()) {
-                page.redirect('/login');
-            }
-        };
-        /**
          * [loadSession description]
          * @return {[type]} [description]
          */
@@ -149,6 +140,14 @@
     }
 
     app = new App();
+
+    function requireAuth(ctx, next){
+        if (!app.session().authenticated()) {
+            return page.redirect('/login');
+        }
+        next();
+    }
+
     page('/', function() {
         if(app.session().authenticated()) {
             page.redirect('/home');
@@ -166,15 +165,13 @@
         app.clearSession();
         page.redirect('/login');
     });
-    page('/userlist', function() {
-        app.requireAuth();
+    page('/userlist', requireAuth, function(ctx) {
         app.view({
             name: 'template-userlist',
             data: new view.UserList()
         });
     });
-    page('/home', function() {
-        app.requireAuth();
+    page('/home', requireAuth, function(ctx) {
         app.view({
             name: 'template-home'
         });
