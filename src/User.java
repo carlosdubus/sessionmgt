@@ -16,8 +16,7 @@ public class User {
 		this.id = User.id_counter;
 		this.name = name;
 		this.role = role;
-		this.password = password;
-
+		this.password = SessionManager.encryptPassword(password);
 		User.users.put(id, this);
 		id_counter += 1;
 	}
