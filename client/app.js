@@ -67,6 +67,9 @@
             statusCode: {
                 403: function() {
                     self.error("Error: User not authorized to see user list.");
+                },
+                419: function() {
+                    page.redirect('/logout');
                 }
             }
         }).then(function(response) {
@@ -146,11 +149,7 @@
     }
 
     page('/', function() {
-        if(app.session().authenticated()) {
-            page.redirect('/home');
-        } else {
-            page.redirect('/login');
-        }
+        page.redirect('/home');
     });
     page('/login', function() {
         app.view({
