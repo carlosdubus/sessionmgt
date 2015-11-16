@@ -13,6 +13,7 @@
 		<script type="text/html" id="template-login">
 			<h2 data-bind=>Login</h2>
 			<div class="error" data-bind="visible: error(), text: error()"></div>
+			<div class="error" data-bind="visible: $root.session().expired">Session expired.</div>
 			<form data-bind="submit: submit">
 				<div>User: <input type="text" data-bind="value: user" /></div>
 				<div>Password: <input type="password" data-bind="value: password" /></div>

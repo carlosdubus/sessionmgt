@@ -69,7 +69,8 @@
                     self.error("Error: User not authorized to see user list.");
                 },
                 419: function() {
-                    page.redirect('/logout');
+                    app.session().expired = true;
+                    page.redirect('/login');
                 }
             }
         }).then(function(response) {
@@ -84,6 +85,7 @@
      */
     function Session(){
         this.token = null;
+        this.expired = false;
         this.authenticated = function() {
             return !!this.token;
         };
