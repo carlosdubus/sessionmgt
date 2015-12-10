@@ -30,7 +30,14 @@ java -cp ./src:./lib/json-simple-1.1.1.jar Main
 java -cp ./src/:./tests:./lib/json-simple-1.1.1.jar:./lib/junit-4.12.jar:./lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore SessionManagerTest 
 ```
 TestRunner
+
+## Or run the following script
+```
+$ ./TestsRunner SessionManagerTest
+```
+
 ## To test in browser:
 ```
 localhost:8000
 ```
+
