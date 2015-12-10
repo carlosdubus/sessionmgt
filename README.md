@@ -18,12 +18,18 @@ The client is an JavaScript application that runs in the browse as single page a
 
 ## To compile:
 ```
-javac -cp ./lib/json-simple-1.1.1.jar src/*.java
+javac tests/*.java src/*.java -cp ./lib/json-simple-1.1.1.jar:./lib/junit-4.12.jar
+
 ```
 ## To run:
 ```
 java -cp ./src:./lib/json-simple-1.1.1.jar Main
 ```
+## To run tests:
+```
+java -cp ./src/:./tests:./lib/json-simple-1.1.1.jar:./lib/junit-4.12.jar:./lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore SessionManagerTest 
+```
+TestRunner
 ## To test in browser:
 ```
 localhost:8000
