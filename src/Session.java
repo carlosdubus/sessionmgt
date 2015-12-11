@@ -8,10 +8,9 @@ class Session {
     private Date expireDate;
     private String token;
     final static long ONE_MINUTE_IN_MILLIS = 60000;//millisecs
-    final static int minutes = 1;
 
     public Session(User user, String token) {
-        this(user, token, 1);
+        this(user, token, 0);
     }
 
     public Session(User user, String token, int expireMinutes) {
@@ -38,7 +37,7 @@ class Session {
     }
 
     boolean isExpired(){
-        return (getExpireDate().compareTo(new Date()) < 0);
+        return (getExpireDate().compareTo(new Date()) <= 0);
     }
 
     boolean hasRole(String role){

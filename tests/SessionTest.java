@@ -17,7 +17,7 @@ public class SessionTest{
 
   @Test
   public void testSessionIsNotExpired(){
-    Assert.assertFalse(session.isExpired());
+    Assert.assertFalse("Session should not be expired.", session.isExpired());
   }
 
   @Test
