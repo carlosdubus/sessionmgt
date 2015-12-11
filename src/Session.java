@@ -11,7 +11,11 @@ class Session {
     final static int minutes = 1;
 
     public Session(User user, String token) {
-        setExpireDate();
+        this(user, token, 1);
+    }
+
+    public Session(User user, String token, int expireMinutes) {
+        setExpireDate(expireMinutes);
         this.user = user;
         this.token = token;
         Session.sessions.put(token, this);
@@ -25,7 +29,7 @@ class Session {
         return token;
     }
 
-    private void setExpireDate(){
+    private void setExpireDate(int minutes){
         this.expireDate = new Date((new Date()).getTime() + (minutes * ONE_MINUTE_IN_MILLIS));
     }
 
