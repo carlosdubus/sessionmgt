@@ -8,6 +8,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class SessionManager {
+
+    final static int TOKEN_LENGTH = 8;
+
     public String authenticate(String name, String password) {
         User a_user = User.find(name);
         if(a_user != null){
@@ -22,7 +25,7 @@ public class SessionManager {
         SecureRandom random = new SecureRandom();
         byte bytes[] = new byte[20];
         random.nextBytes(bytes);
-        String token = bytes.toString();
+        String token = bytes.toString().substring(0, TOKEN_LENGTH);
         new Session(user, token);
         return token;
     }

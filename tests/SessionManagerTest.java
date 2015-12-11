@@ -25,7 +25,7 @@ public class SessionManagerTest{
   public void testAuthenticationReturnsValidToken(){
     SessionManager s = new SessionManager();
     String token = s.authenticate("Hue", "1234");
-    Assert.assertEquals(token.length(), 11);
+    Assert.assertEquals(token.length(), SessionManager.TOKEN_LENGTH);
   }
 
   @After
