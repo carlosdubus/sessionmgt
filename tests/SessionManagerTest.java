@@ -13,6 +13,12 @@ public class SessionManagerTest{
     Assert.assertNotNull(s.authenticate("Hue", "1234"));
   }
 
+  @Test
+  public void testAuthenticationWithInvalidCredentials(){
+    SessionManager s = new SessionManager();
+    Assert.assertNull(s.authenticate("Hue", "invalid"));
+  }
+
   @After
   public void tearDown(){
   }
